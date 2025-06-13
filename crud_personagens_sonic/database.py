@@ -13,8 +13,8 @@ def criar_tabela():
     CREATE TABLE IF NOT EXISTS personagens (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
-        time TEXT,
         tipo TEXT,
+        time TEXT,
         cor TEXT,
         poderes TEXT
     )
@@ -24,14 +24,14 @@ def criar_tabela():
     conexao.close()
 
 # Função para adicionar um novo personagem
-def adicionar_personagem(nome, time, tipo, cor, poderes):
+def adicionar_personagem(nome, tipo, time, cor, poderes):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
-        INSERT INTO personagens (nome, time, tipo, cor, poderes)
+        INSERT INTO personagens (nome, tipo, time, cor, poderes)
         VALUES (?, ?, ?, ?, ?)
-    """, (nome, time, tipo, cor, poderes))
+    """, (nome, tipo, time, cor, poderes))
 
     conexao.commit()
     conexao.close()
@@ -48,15 +48,15 @@ def listar_personagens():
     return resultados
 
 # Função para atualizar um personagem existente
-def atualizar_personagem(id, nome, time, tipo, cor, poderes):
+def atualizar_personagem(id, nome, tipo, time, cor, poderes):
     conexao = conectar()
     cursor = conexao.cursor()
 
     cursor.execute("""
         UPDATE personagens
-        SET nome = ?, time = ?, tipo = ?, cor = ?, poderes = ?
+        SET nome = ?, tipo = ?, time = ?, cor = ?, poderes = ?
         WHERE id = ?
-    """, (nome, time, tipo, cor, poderes, id))
+    """, (nome, tipo, time, cor, poderes, id))
 
     conexao.commit()
     conexao.close()

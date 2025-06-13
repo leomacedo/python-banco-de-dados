@@ -21,54 +21,90 @@ def iniciar():
 
     while True:
         menu()
-        escolha = input("Escolha uma opção: ")
+        escolha = input("\nEscolha uma opção: ")
 
         if escolha == "1":
             nome = input("Nome do personagem: ")
-            time = input("Time (Sonic, Dark, Chaotix, etc): ")
             tipo = input("Tipo (Speed, Power, Fly): ")
+            time = input("Time (Sonic, Dark, Chaotix, etc): ")
             cor = input("Cor predominante: ")
             poderes = input("Poderes: ")
 
-            adicionar_personagem(nome, time, tipo, cor, poderes)
+            adicionar_personagem(nome, tipo, time, cor, poderes)
             print(f"{nome} adicionado com sucesso!")
 
         elif escolha == "2":
             personagens = listar_personagens()
-            print("\n--- Lista de Personagens ---")
-            for p in personagens:
-                print(f"ID: {p[0]} | Nome: {p[1]} | Time: {p[2]} | Tipo: {p[3]} | Cor: {p[4]} | Poderes: {p[5]}")
+
+            if not personagens:
+                print("⚠️  Nenhum personagem cadastrado ainda.")
+            
+            else:
+                print("\n--- Lista de Personagens ---")
+                for p in personagens:
+                    print(f"Nome: {p[1]} | Tipo: {p[2]} | Time: {p[3]} | Cor: {p[4]} | Poderes: {p[5]}")
 
         elif escolha == "3":
-            try:
-                id = int(input("ID do personagem a atualizar: "))
-                personagem = buscar_por_id(id)
+            personagens = listar_personagens()
 
-                if personagem:
-                    nome = input("Novo nome: ")
-                    time = input("Novo time: ")
-                    tipo = input("Novo tipo: ")
-                    cor = input("Nova cor: ")
-                    poderes = input("Novos poderes: ")
+            if not personagens:
+                print("⚠️  Nenhum personagem cadastrado ainda.")
 
-                    atualizar_personagem(id, nome, time, tipo, cor, poderes)
-                    print("✅ Personagem atualizado com sucesso!")
-                else:
-                    print("❌ ID não encontrado. Nenhuma atualização realizada.")
-            except ValueError:
-                print("⚠️  Entrada inválida. Por favor, digite um número.")
+            else:
+                print("\n--- Personagens disponíveis para atualização ---")
+                for p in personagens:
+                    print(f"ID: {p[0]} | {p[1]}")
+            
+                try:
+                    id = int(input("\nID do personagem a atualizar: "))
+                    personagem = buscar_por_id(id)
 
+                    if personagem:
+                        print("\n📝 Dados atuais do personagem:")
+                        print(f"Nome: {personagem[1]} | Tipo: {personagem[2]} | Time: {personagem[3]} | Cor: {personagem[4]} | Poderes: {personagem[5]}")
+                        print()
+
+                        nome = input("Novo nome: ")
+                        tipo = input("Novo tipo: ")
+                        time = input("Novo time: ")
+                        cor = input("Nova cor: ")
+                        poderes = input("Novos poderes: ")
+
+                        atualizar_personagem(id, nome, tipo, time, cor, poderes)
+                        print("✅ Personagem atualizado com sucesso!")
+                    else:
+                        print("❌ ID não encontrado. Nenhuma atualização realizada.")
+                except ValueError:
+                    print("⚠️  Entrada inválida. Por favor, digite um número.")
+        
         elif escolha == "4":
-            try:
-                id = int(input("ID do personagem a remover: "))
-                personagem = buscar_por_id(id)
-                if personagem:
-                    deletar_personagem(id)
-                    print("🗑️ Personagem removido com sucesso!")
-                else:
-                    print("❌ ID não encontrado. Nenhuma exclusão realizada.")
-            except ValueError:
-                print("⚠️  Entrada inválida. Por favor, digite um número.")
+            personagens = listar_personagens()
+
+            if not personagens:
+                print("⚠️  Nenhum personagem cadastrado ainda.")
+            
+            else:
+                print("\n--- Personagens disponíveis para exclusão ---")
+                for p in personagens:
+                    print(f"ID: {p[0]} | {p[1]}")
+
+                try:
+                    id = int(input("\nID do personagem a remover: "))
+                    personagem = buscar_por_id(id)
+
+                    if personagem:
+                        print(f"\nVocê está prestes a remover: {personagem[1]} (ID: {personagem[0]})")
+                        confirmacao = input("Tem certeza que deseja apagar? (s/n): ").lower()
+
+                        if confirmacao == "s":
+                            deletar_personagem(id)
+                            print("🗑️  Personagem removido com sucesso!")
+                        else:
+                            print("❌ Remoção cancelada.")
+                    else:
+                        print("❌ ID não encontrado. Nenhuma exclusão realizada.")
+                except ValueError:
+                    print("⚠️  Entrada inválida. Por favor, digite um número.")
 
         elif escolha == "5":
             print("Encerrando programa. Até mais!")
