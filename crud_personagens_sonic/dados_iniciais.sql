@@ -1,8 +1,22 @@
-CREATE TABLE IF NOT EXISTS personagens (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    time TEXT,
-    tipo TEXT,
-    cor TEXT,
-    poderes TEXT
-);
+INSERT INTO personagens (nome, tipo, time, cor, poderes) VALUES 
+('Sonic', 'Speed', 'Sonic', 'Azul', 'Spin Dash, Homing Attack'),
+('Tails', 'Fly', 'Sonic', 'Amarelo', 'Voo, Tecnologia'),
+('Knuckles', 'Power', 'Sonic', 'Vermelho', 'Força Bruta, Escalada'),
+('Amy', 'Speed', 'Rose', 'Rosa', 'Pico Pico Hammer, Amor Incondicional'),
+('Shadow', 'Speed', 'Dark', 'Preto', 'Chaos Control, Super Velocidade'),
+('Rouge', 'Fly', 'Dark', 'Branco', 'Espionagem, Voo'),
+('Omega', 'Power', 'Dark', 'Cinza', 'Arsenal Pesado, Laser'),
+('Vector', 'Power', 'Chaotix', 'Verde', 'Força Bruta, Detetive'),
+('Charmy', 'Fly', 'Chaotix', 'Amarelo', 'Voo, Zumbido'),
+('Espio', 'Speed', 'Chaotix', 'Roxo', 'Camuflagem, Técnica Ninja'),
+('Cream', 'Fly', 'Rose', 'Bege', 'Voo, Comando do Chao Cheese'),
+('Big', 'Power', 'Rose', 'Roxo', 'Pescaria, Super Força'),
+('Silver', 'Psychic', 'Future', 'Branco', 'Telecinese, Viagem no Tempo'),
+('Blaze', 'Fire', 'Future', 'Roxo', 'Controle de Fogo, Agilidade'),
+('Metal Sonic', 'Speed', 'Eggman Empire', 'Azul', 'Cópia de habilidades, Super Velocidade'),
+('Dr. Eggman', 'Power', 'Eggman Empire', 'Vermelho', 'Máquinas, Estratégia'),
+('Tikal', 'Fly', 'Ancients', 'Laranja', 'Espírito Guardião, Comunicação com Chaos'),
+('Chaos', 'Power', 'Ancients', 'Azul', 'Controle da Água, Transformações'),
+('Jet', 'Speed', 'Babylon Rogues', 'Verde', 'Extreme Gear, Corrida Aérea'),
+('Wave', 'Fly', 'Babylon Rogues', 'Roxo', 'Engenharia, Corrida Aérea'),
+('Storm', 'Power', 'Babylon Rogues', 'Cinza', 'Força Bruta, Corrida Aérea');

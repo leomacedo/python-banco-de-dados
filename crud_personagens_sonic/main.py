@@ -4,7 +4,10 @@ from database import (
     listar_personagens,
     atualizar_personagem,
     deletar_personagem,
-    buscar_por_id
+    buscar_por_id,
+    buscar_por_campo,
+    importar_sql,
+    limpar_tabela
 )
 
 
@@ -14,7 +17,9 @@ def menu():
     print("2. Listar todos")
     print("3. Atualizar personagem")
     print("4. Remover personagem")
-    print("5. Sair")
+    print("5. Buscar personagem por campo")
+    print("6. Sair")
+    print("7. Importar dados iniciais sugeridos")
 
 def iniciar():
     criar_tabela()
@@ -105,10 +110,69 @@ def iniciar():
                         print("❌ ID não encontrado. Nenhuma exclusão realizada.")
                 except ValueError:
                     print("⚠️  Entrada inválida. Por favor, digite um número.")
-
+        
         elif escolha == "5":
+            campos = {
+                "1": "nome",
+                "2": "tipo",
+                "3": "time",
+                "4": "cor",
+                "5": "poderes"
+            }
+            
+            print("\n🔎 Buscar personagem por campo")
+            print("Digite o número do campo que deseja buscar:")
+            print("1 - nome | 2 - tipo | 3 - time | 4 - cor | 5 - poderes")
+
+            escolha_campo = input("\nEscolha: ")
+
+            campo = campos.get(escolha_campo)
+
+            if not campo:
+                print("❌  Opção inválida. Campo não existe.")
+                continue
+
+            valor = input(f"Digite o valor que deseja buscar em '{campo}': ")
+
+            # Faz a busca no banco
+            personagens = buscar_por_campo(campo, valor)
+
+            if personagens:
+                print(f"\n📋 Resultados para {campo} = '{valor}':")
+                for p in personagens:
+                    print(f"Nome: {p[1]} | Tipo: {p[2]} | Time: {p[3]} | Cor: {p[4]} | Poderes: {p[5]}")
+            else:
+                print("⚠️  Nenhum personagem encontrado com esse critério.")
+
+        elif escolha == "6":
             print("Encerrando programa. Até mais!")
             break
+
+
+        elif escolha == "7":
+            print("\n🧩 Importar personagens sugeridos")
+            print("1 - Adicionar ao banco atual")
+            print("2 - Substituir todos os dados existentes")
+            opcao = input("Escolha uma opção (1 ou 2): ")
+
+            if opcao not in ["1", "2"]:
+                print("❌ Opção inválida.")
+                continue
+
+            if opcao == "2":
+                confirm = input("⚠️  Isso apagará todos os personagens cadastrados. Tem certeza? (s/n): ").lower()
+                if confirm != "s":
+                    print("❌ Operação cancelada.")
+                    continue
+                limpar_tabela()
+
+            try:
+                importar_sql("dados_iniciais.sql")
+                print("✅ Dados sugeridos importados com sucesso!")
+            except FileNotFoundError:
+                print("❌ Arquivo 'dados_iniciais.sql' não encontrado.")
+            except Exception as e:
+                print(f"❌ Erro ao importar dados: {e}")
 
         else:
             print("❌ Opção inválida. Tente novamente.")

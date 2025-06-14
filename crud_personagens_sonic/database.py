@@ -83,3 +83,37 @@ def buscar_por_id(id):
     conexao.close()
     return resultado  # Retorna None se não achar
 
+# Função que realiza uma busca por campo e valor
+def buscar_por_campo(campo, valor):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    query = f"SELECT * FROM personagens WHERE {campo} LIKE ?"
+    cursor.execute(query, (f"%{valor}%",))
+
+    resultados = cursor.fetchall()
+    conexao.close()
+    return resultados
+
+
+# Função para importar dados de um arquivo SQL
+def importar_sql(caminho_arquivo):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+        sql = f.read()
+        cursor.executescript(sql)
+
+    conexao.commit()
+    conexao.close()
+
+
+# Função para apagar todos os dados da tabela
+def limpar_tabela():
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("DELETE FROM personagens")
+    conexao.commit()
+    conexao.close()
+
