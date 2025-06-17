@@ -10,7 +10,7 @@ from database import (
     limpar_tabela
 )
 
-
+# Exibição do menu para interação do Banco de dados
 def menu():
     print("\n--- Banco de Dados do Universo Sonic 🌀 ---")
     print("1. Adicionar personagem")
