@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 # Função para conectar ao banco de dados
 def conectar():
@@ -116,4 +117,23 @@ def limpar_tabela():
     cursor.execute("DELETE FROM personagens")
     conexao.commit()
     conexao.close()
+
+
+# Função para importar o banco de dados em um arquivo CSV de backup
+def exportar_para_csv():
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM personagens")
+    dados = cursor.fetchall()
+
+    # Nome das colunas
+    colunas = ["id", "nome", "tipo", "time", "cor", "poderes"]
+
+    with open("backup_personagens.csv", mode="w", newline="", encoding="utf-8-sig") as arquivo:
+        escritor = csv.writer(arquivo)
+        escritor.writerow(colunas)
+        escritor.writerows(dados)
+
+    conexao.close()
+    print("✅ Backup exportado para 'backup_personagens.csv'")
 

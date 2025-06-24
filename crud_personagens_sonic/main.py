@@ -7,7 +7,8 @@ from database import (
     buscar_por_id,
     buscar_por_campo,
     importar_sql,
-    limpar_tabela
+    limpar_tabela,
+    exportar_para_csv
 )
 
 # Exibição do menu para interação do Banco de dados
@@ -20,6 +21,7 @@ def menu():
     print("5. Buscar personagem por campo")
     print("6. Sair")
     print("7. Importar dados iniciais sugeridos")
+    print("8. Exportar backup da tabela para CSV")
 
 def iniciar():
     criar_tabela()
@@ -173,6 +175,9 @@ def iniciar():
                 print("❌ Arquivo 'dados_iniciais.sql' não encontrado.")
             except Exception as e:
                 print(f"❌ Erro ao importar dados: {e}")
+        
+        elif escolha == "8":
+            exportar_para_csv()
 
         else:
             print("❌ Opção inválida. Tente novamente.")

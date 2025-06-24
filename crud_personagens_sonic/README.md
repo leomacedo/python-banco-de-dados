@@ -11,10 +11,11 @@ Este projeto é um CRUD (Create, Read, Update, Delete) feito em **Python + SQLit
 
 - [x] Adicionar personagem
 - [x] Listar todos os personagens cadastrados
-- [x] Atualizar dados de um personagem existente
-- [x] Remover personagem com confirmação
+- [x] Atualizar dados de um personagem existente (com visualização dos dados atuais)
+- [x] Remover personagem com confirmação e visualização prévia
 - [x] Buscar personagens por **campo específico** (nome, tipo, time, cor ou poderes)
-- [x] Importar dados iniciais sugeridos com opção de **adicionar** ou **substituir** a tabela
+- [x] Importar dados iniciais sugeridos com opção de **adicionar** ou **substituir** a tabela existente
+- [x] Exportar todos os personagens para um arquivo `.csv` com acentuação correta e nome fixo (mas ignorado no Git)
 
 ---
 
@@ -46,7 +47,9 @@ Cada personagem cadastrado possui os seguintes campos:
 | `main.py`              | Código principal com o menu interativo e chamadas das funções |
 | `database.py`          | Funções de banco de dados (CRUD, busca, importação, limpeza) |
 | `dados_iniciais.sql`   | Script SQL com dados padrão de personagens do universo Sonic |
-| `.gitignore`           | Ignora arquivos desnecessários no Git, como `.db` e `__pycache__` |
+| `.gitignore`           | Arquivo que impede o versionamento de arquivos temporários ou sensíveis como `.db`, `__pycache__` e `.csv` |
+
+
 
 ---
 
@@ -78,7 +81,10 @@ python main.py
 5. Buscar personagem por campo
 6. Sair
 7. Importar dados iniciais sugeridos
+8. Exportar backup da tabela para CSV
 ```
+
+> 🗒️ Observação: O arquivo `.csv` gerado pelo menu (opção 8) **não é salvo no GitHub**, pois está incluído no `.gitignore`. Isso evita poluir o repositório com backups locais e mantém seu repositório limpo e profissional.
 
 ---
 
