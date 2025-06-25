@@ -9,47 +9,49 @@ Este projeto é um CRUD (Create, Read, Update, Delete) feito em **Python + SQLit
 
 ## 🎮 Funcionalidades
 
-- [x] Adicionar personagem
-- [x] Listar todos os personagens cadastrados
-- [x] Atualizar dados de um personagem existente (com visualização dos dados atuais)
-- [x] Remover personagem com confirmação e visualização prévia
-- [x] Buscar personagens por **campo específico** (nome, tipo, time, cor ou poderes)
-- [x] Importar dados iniciais sugeridos com opção de **adicionar** ou **substituir** a tabela existente
-- [x] Exportar todos os personagens para um arquivo `.csv` com acentuação correta e nome fixo (mas ignorado no Git)
+- [x] Adicionar novo personagem ao banco de dados
+- [x] Listar todos os personagens cadastrados (sem exibir o ID)
+- [x] Atualizar dados com visualização dos valores antigos
+- [x] Remover personagem com confirmação de exclusão
+- [x] Buscar personagem por campo (nome, tipo, time, cor ou poderes)
+- [x] Importar **dados sugeridos** com opção de **adicionar** ou **substituir** a tabela
+- [x] Exportar os personagens para arquivo `.csv` com **acentuação preservada**
+- [x] `.csv` é ignorado no GitHub via `.gitignore` (mantendo o repositório limpo)
+- [x] Validação de entrada para evitar erros (ex: letras em campos numéricos)
+- [x] Layout organizado, mensagens de retorno claras e UX amigável via terminal
 
 ---
 
-## 📋 Estrutura do personagem
+## 📋 Estrutura de dados do personagem
 
-Cada personagem cadastrado possui os seguintes campos:
+Cada personagem possui os seguintes campos:
 
-- `nome`: Nome do personagem (ex: Sonic)
-- `tipo`: Speed, Power ou Fly
-- `time`: Time ao qual pertence (Sonic, Dark, Chaotix, etc.)
-- `cor`: Cor predominante do personagem
-- `poderes`: Habilidades especiais ou características marcantes
+| Campo    | Descrição                                        |
+|----------|--------------------------------------------------|
+| `nome`   | Nome do personagem (ex: Sonic, Tails, Knuckles) |
+| `tipo`   | Speed, Power ou Fly                              |
+| `time`   | Time de origem (Sonic, Dark, Babylon Rogues...)  |
+| `cor`    | Cor predominante (Azul, Amarelo, Roxo...)         |
+| `poderes`| Habilidades especiais ou marcantes               |
 
 ---
 
 ## 🧠 Tecnologias utilizadas
 
 - **Python 3**
-- **SQLite** (banco de dados local)
-- **VSCode**
-- Extensão recomendada: *SQLite Viewer* para explorar `sonic.db` graficamente
+- **SQLite3** (banco de dados embutido, simples e funcional)
+- **VSCode** com extensão SQLite Viewer (opcional para ver o banco `.db` graficamente)
 
 ---
 
 ## 🗃️ Organização do projeto
 
-| Arquivo                 | Descrição |
-|------------------------|-----------|
-| `main.py`              | Código principal com o menu interativo e chamadas das funções |
-| `database.py`          | Funções de banco de dados (CRUD, busca, importação, limpeza) |
-| `dados_iniciais.sql`   | Script SQL com dados padrão de personagens do universo Sonic |
-| `.gitignore`           | Arquivo que impede o versionamento de arquivos temporários ou sensíveis como `.db`, `__pycache__` e `.csv` |
-
-
+| Arquivo                | Descrição                                                                 |
+|------------------------|---------------------------------------------------------------------------|
+| `main.py`              | Interface principal com o menu e lógica de entrada do usuário             |
+| `database.py`          | Todas as operações do banco de dados (CRUD, busca, exportação, etc.)      |
+| `dados_iniciais.sql`   | Tabela com personagens icônicos para importar de forma prática            |
+| `.gitignore`           | Impede versionamento de arquivos como `.db`, `.csv` e `__pycache__`       |
 
 ---
 
@@ -84,7 +86,7 @@ python main.py
 8. Exportar backup da tabela para CSV
 ```
 
-> 🗒️ Observação: O arquivo `.csv` gerado pelo menu (opção 8) **não é salvo no GitHub**, pois está incluído no `.gitignore`. Isso evita poluir o repositório com backups locais e mantém seu repositório limpo e profissional.
+> 🗒️ Observação: O arquivo `.csv` gerado pelo menu (opção 8) **não é salvo no GitHub**, pois está incluído no `.gitignore`. Isso evita poluir o repositório com backups locais e mantém o repositório limpo.
 
 ---
 

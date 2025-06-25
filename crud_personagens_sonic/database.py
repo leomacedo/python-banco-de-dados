@@ -1,5 +1,7 @@
 import sqlite3
 import csv
+import os
+from datetime import datetime  # vamos usar para gerar o nome do arquivo com data/hora
 
 # Função para conectar ao banco de dados
 def conectar():
@@ -121,19 +123,22 @@ def limpar_tabela():
 
 # Função para importar o banco de dados em um arquivo CSV de backup
 def exportar_para_csv():
-    conexao = conectar()
-    cursor = conexao.cursor()
-    cursor.execute("SELECT * FROM personagens")
-    dados = cursor.fetchall()
+    personagens = listar_personagens()
 
-    # Nome das colunas
-    colunas = ["id", "nome", "tipo", "time", "cor", "poderes"]
+    if not personagens:
+        print("⚠️ Nenhum personagem para exportar.")
+        return
 
-    with open("backup_personagens.csv", mode="w", newline="", encoding="utf-8-sig") as arquivo:
-        escritor = csv.writer(arquivo)
-        escritor.writerow(colunas)
-        escritor.writerows(dados)
+    # Gera nome do arquivo com data e hora (ex: backup_2025-06-10_14-30-00.csv)
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    nome_arquivo = f"backup_personagens_{timestamp}.csv"
 
-    conexao.close()
-    print("✅ Backup exportado para 'backup_personagens.csv'")
+    try:
+        with open(nome_arquivo, mode="w", newline="", encoding="utf-8-sig") as arquivo:
+            escritor = csv.writer(arquivo)
+            escritor.writerow(["ID", "Nome", "Tipo", "Time", "Cor", "Poderes"])
+            escritor.writerows(personagens)
+        print(f"✅ Backup exportado com sucesso para '{nome_arquivo}'!")
+    except Exception as e:
+        print(f"❌ Erro ao exportar CSV: {e}")
 
