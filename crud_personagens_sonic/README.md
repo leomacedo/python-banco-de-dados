@@ -86,7 +86,7 @@ python main.py
 8. Exportar backup da tabela para CSV
 ```
 
-> 🗒️ Observação: O arquivo `.csv` gerado pelo menu (opção 8) **não é salvo no GitHub**, pois está incluído no `.gitignore`. Isso evita poluir o repositório com backups locais e mantém o repositório limpo.
+> 🗒️ Observação: O arquivo `.csv` gerado pelo menu (opção 8) **não é salvo no GitHub**, pois está incluído no `.gitignore`. Isso evita poluir o repositório com backups locais.
 
 ---
 
