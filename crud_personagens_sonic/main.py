@@ -144,7 +144,7 @@ def iniciar():
                 for p in personagens:
                     print(f"Nome: {p[1]} | Tipo: {p[2]} | Time: {p[3]} | Cor: {p[4]} | Poderes: {p[5]}")
             else:
-                print("⚠️  Nenhum personagem encontrado com esse critério.")
+                print("⚠️ Nenhum personagem encontrado com esse critério.")
 
         elif escolha == "6":
             print("Encerrando programa. Até mais!")
